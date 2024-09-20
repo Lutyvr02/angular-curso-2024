@@ -11,5 +11,8 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'angular-course-2024';
 
+  num1 = 12;
+  num2 = 12;
   
+
 }
