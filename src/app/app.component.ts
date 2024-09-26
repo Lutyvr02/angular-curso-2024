@@ -19,19 +19,28 @@ export class AppComponent {
   animals:string[] = ['a','b','c','d','e','f','g']
 
   person: IPerson = {
-    name: 'a',
-    lastname: 'b',
+    name: 'juan',
+    lastname: 'perez',
     age: 12
   }
 
-  constructor(){
-    console.log('subtract', this.sub(8,4))
+  students:number[] = [1,2,3,4,5,6]
+  parents:number[] = [7,8,9,10]
 
-    console.log('MAP: ', this.animals.map( (animal) => {animal + 'new'}))
+  constructor(){
+    const {name, age} = this.person
+    console.log('desustruraccion', name, age)
+
+    let both = [...this.students,...this.parents]
+    console.log("spread proyector: "+both)
+
+    console.log('REST operator: ', this.sum2(2,4,6))
+
+    /*console.log('MAP: ', this.animals.map( (animal) => {animal + 'new'}))
     console.log('FOREACH: ', this.animals.forEach((animal)=>{animal + 'new'}))
     console.log('FIND', this.animals.find((animal)=> animal == 'b'))
     console.log('FILTER', this.animals.filter((animal)=> animal == 'c'))
-    console.log('INDEXOF', this.animals.indexOf('c'))
+    console.log('INDEXOF', this.animals.indexOf('c'))*/
   }
 
   public sum (num1:number, num2:number): number {
@@ -51,15 +60,9 @@ export class AppComponent {
     }
   }
 
-  /*const suma = () => {
-
+  public sum2(...persons:number[]){
+    //return persons[0] + persons[1]
+    return persons.reduce((acumulador, valorActual) => (acumulador+ valorActual))
   }
-
-  const resta = (a:number) => {
-    20-a
-  }'''*/
-
-
-
 
 }
