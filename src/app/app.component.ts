@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 interface IPerson{
   name:string,
@@ -11,11 +12,13 @@ interface IPerson{
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UserCardComponent], 
+  imports: [RouterOutlet, UserCardComponent, CalculatorComponent], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
+  result = 0
   title = 'angular-course-2024';  
   animals:string[] = ['a','b','c','d','e','f','g']
 
@@ -78,4 +81,7 @@ export class AppComponent {
     console.log('Print: '+data) 
   }
 
+  public onResult(event:any){
+    this.result = event ?? 0
+  }
 }

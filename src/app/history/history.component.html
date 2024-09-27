@@ -1,0 +1,9 @@
+<div class="history">
+    <h3>Operation History</h3>
+    <ul>
+      <li *ngFor="let entry of operationsHistory">
+        {{entry.operation}}: {{entry.result}}
+      </li>
+    </ul>
+  </div>
+  
