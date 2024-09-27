@@ -10,7 +10,7 @@ import { HistoryComponent } from '../history/history.component';
   styleUrl: './calculator.component.scss'
 })
 export class CalculatorComponent {
-  box1Value:number = 0;
+  box1Value:number = 0; 
   box2Value:number = 0;
   operationsHistory: { operation: string, result: number }[] = [];
 
