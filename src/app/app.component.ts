@@ -74,4 +74,8 @@ export class AppComponent {
     return persons.reduce((acumulador, valorActual) => (acumulador+ valorActual))
   }
 
+  public recieveData(data:any){
+    console.log('Print: '+data) 
+  }
+
 }

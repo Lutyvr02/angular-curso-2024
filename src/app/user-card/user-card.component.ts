@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user-card',
@@ -12,5 +12,9 @@ export class UserCardComponent {
   @Input() name: string = ''
   @Input() email:string = ''
 
-  @Output() sendData: any;
+  @Output() sendData = new EventEmitter()
+  public onSendData(){
+    this.sendData.emit('hola desde el hijo')
+  }
+
 }

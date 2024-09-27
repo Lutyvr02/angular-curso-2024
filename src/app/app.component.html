@@ -1,8 +1,8 @@
 <h1>suma de variables, {{ 12}}</h1>
 
-<p>Add {{sum(3,5)}}</p> 
+<p>Add {{sum(3,5)}}</p>
 <!---<p>Substrack {{sub(9,5)}}</p>-->
 
 <p>only pares {{getArray()}}</p>
 
-<user-card> name="juan" [email]="'juan@gmail.com'"</user-card>    
+<app-user-card name="Juan" [email]="'juan@gmail.com'" (sendData)="recieveData($event)"></app-user-card>
