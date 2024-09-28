@@ -5,8 +5,22 @@
 
 <p>only pares {{getArray()}}</p>
 
-<app-user-card name="Juan" [email]="'juan@gmail.com'" (sendData)="recieveData($event)"></app-user-card>
+<app-user-card name="Juan" [email]="'juan@gmail.com'" (sendData)="recieveData($event)">
+    <p>hola</p>
+    <button>hola</button>
+</app-user-card>
 
 <p>Result: {{result}}</p>
+<calculator (sum)="onResult($event)" (mul)="onResult($event)"  (reset)="onResult($event)" >
 
-<calculator (sum)="onResult($event)" (mul)="onResult($event)"  (reset)="onResult($event)" ></calculator>
+</calculator>
+
+
+<p *ngIf="1 == 1"> variables are equals </p>
+
+@if (1==1) {
+    <p>
+        Variables are equals
+    </p>
+}
+
