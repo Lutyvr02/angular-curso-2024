@@ -1,0 +1,16 @@
+<h1>Lista de Personas</h1>
+
+<p>Total de personas (Femenino): {{ totalFemales }}</p>
+<p>Total de personas (Masculino): {{ totalMales }}</p>
+
+<div *ngFor="let person of persons">
+  <div class="person-card" [ngClass]="{'discounted': person.discount}">
+    <p>Nombre: {{ person.name }}</p>
+    <p>Género: {{ person.gender }}</p>
+    <p>Edad: {{ person.age }}</p>
+    <p *ngIf="person.discount">¡Descuento aplicado!</p>
+  </div>
+</div>
+
+<button (click)="applyDiscount()">Aplicar descuento a mayores de 18</button>
+<button (click)="removeDiscountedPersons()">Borrar personas con descuento</button>
