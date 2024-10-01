@@ -5,11 +5,13 @@
 
 <p>only pares {{getArray()}}</p>
 
+<button (click)="userCardCreated = !userCardCreated">create and destroy user card</button>
+@if (userCardCreated) {
 <app-user-card name="Juan" [email]="'juan@gmail.com'" (sendData)="recieveData($event)">
     <p>hola</p>
     <button>hola</button>
 </app-user-card>
-
+}
 <p>Result: {{result}}</p>
 <calculator (sum)="onResult($event)" (mul)="onResult($event)"  (reset)="onResult($event)" >
 

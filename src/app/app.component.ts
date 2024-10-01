@@ -86,4 +86,6 @@ export class AppComponent {
   public onResult(event:any){
     this.result = event ?? 0
   }
+
+  userCardCreated: boolean = true
 }
