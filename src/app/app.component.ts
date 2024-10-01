@@ -20,6 +20,9 @@ interface IPerson{
 })
 export class AppComponent {
 
+  users = [{name: 'abc', email: 'abc@gmail.com'}, {name: 'tyty', email: 'tyty@gmail.com'}]
+  selectedUser:any = this.users[0];
+
   result = 0
   title = 'angular-course-2024';  
   animals:string[] = ['a','b','c','d','e','f','g']
@@ -42,13 +45,13 @@ export class AppComponent {
     console.log('desustruraccion', name, age)
 
     let both = [...this.students,...this.parents]
-    console.log("spread proyector: "+both)
+  /*  console.log("spread proyector: "+both)
 
     console.log('REST operator: ', this.sum2(2,4,6))
 
     console.log('Nullish Coalesing: ', this.var2 ??  this.var3)
     
-    console.log('OR: ', this.var1 ||  this.var2)
+    console.log('OR: ', this.var1 ||  this.var2)*/
 
     /*console.log('MAP: ', this.animals.map( (animal) => {animal + 'new'}))
     console.log('FOREACH: ', this.animals.forEach((animal)=>{animal + 'new'}))
