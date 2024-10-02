@@ -5,11 +5,17 @@
     <button (click)="onSendData()">send Data </button>
 
     <input type="text" [(ngModel)] = "password">
-    <button (click)="onSendData()">send data</button>
 
-   <!--- <ng-content></ng-content>--->
+
+ <!--   @if (showButton) {
+        <button #buttonTest (click)="onSendData()">send data</button>
+    } @else {
+        <p>Es falso</p>
+}-->
 
     <p>Password = {{password}}</p>
 
-    <div id="maps"></div>
+    
+    <ng-content></ng-content>
+
 </div>
