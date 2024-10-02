@@ -4,8 +4,12 @@
     <P>INPUT EMAIL: {{ email }}</P>
     <button (click)="onSendData()">send Data </button>
 
-    <ng-content></ng-content>
+    <input type="text" [(ngModel)] = "password">
+    <button (click)="onSendData()">send data</button>
+
+   <!--- <ng-content></ng-content>--->
 
     <p>Password = {{password}}</p>
 
+    <div id="maps"></div>
 </div>
