@@ -6,12 +6,11 @@
 
     <input type="text" [(ngModel)] = "password">
 
-
- <!--   @if (showButton) {
+    <button #buttonShow (click)="showButton = !showButton">show button</button>
+    @if (showButton) {
         <button #buttonTest (click)="onSendData()">send data</button>
-    } @else {
-        <p>Es falso</p>
-}-->
+    }
+
 
     <p>Password = {{password}}</p>
 

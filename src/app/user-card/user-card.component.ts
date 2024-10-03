@@ -12,6 +12,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  viewChild,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -37,8 +38,10 @@ export class UserCardComponent
 
   @Output() sendData = new EventEmitter();
   
-  @ViewChild('buttonTest', {static: true}) buttonTest!: ElementRef
+  @ViewChild('buttonTest', {static: true}) buttonTest!: ElementRef 
+  @ViewChild('buttonShow', {static: true}) buttonShow!: ElementRef 
   
+  private prevPadding = 0;
   public onSendData() {
     this.sendData.emit('hola desde el hijo');
   }
@@ -52,8 +55,8 @@ export class UserCardComponent
   }
 
   ngOnInit(): void {
-    console.log('user cad on init');
-    this.password = this.email + this.name;
+    this.buttonShow.nativeElement.textContent = 'button show in onInit'
+    this.buttonTest.nativeElement.textContent = 'button show in onInit'
   }
 
   ngOnDestroy(): void {
