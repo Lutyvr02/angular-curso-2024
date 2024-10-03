@@ -41,17 +41,17 @@ export class AppComponent {
   var3 = 'hola'
 
   constructor(){
-    const {name, age} = this.person
+ /*   const {name, age} = this.person
     console.log('desustruraccion', name, age)
 
     let both = [...this.students,...this.parents]
-  /*  console.log("spread proyector: "+both)
+  /*  console.log("spread proyector: "+both)*/
 
     console.log('REST operator: ', this.sum2(2,4,6))
 
     console.log('Nullish Coalesing: ', this.var2 ??  this.var3)
     
-    console.log('OR: ', this.var1 ||  this.var2)*/
+  /*  console.log('OR: ', this.var1 ||  this.var2)*/
 
     /*console.log('MAP: ', this.animals.map( (animal) => {animal + 'new'}))
     console.log('FOREACH: ', this.animals.forEach((animal)=>{animal + 'new'}))
@@ -67,7 +67,7 @@ export class AppComponent {
   private sub (num1:number, num2:number): number {
     return num1 - num2
   }
-
+/*
   public getArray(){
     const persons:number[] = [1,2,3,4,5]
     for(let i = 0; i < persons.length; i++){
@@ -75,7 +75,7 @@ export class AppComponent {
         console.log('person =', persons[i])
       }
     }
-  }
+  }*/
 
   public sum2(...persons:number[]){
     //return persons[0] + persons[1]

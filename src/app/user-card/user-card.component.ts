@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterContentChecked,
   AfterContentInit,
+  AfterViewChecked,
   AfterViewInit,
   Component,
   DoCheck,
@@ -31,7 +33,9 @@ export class UserCardComponent
     OnChanges,
     DoCheck,
     AfterContentInit,
-    AfterViewInit
+    AfterViewInit,
+    AfterContentChecked,
+    AfterViewChecked
 {
   @Input() name: string = '';
   @Input() email: string = '';
@@ -54,6 +58,9 @@ export class UserCardComponent
     console.log('user card constructor');
   }
 
+  ngAfterViewChecked(): void {
+    console.log("after view chicked")
+  }
   ngOnInit(): void {
     this.buttonShow.nativeElement.textContent = 'button show in onInit'
     this.buttonTest.nativeElement.textContent = 'button show in onInit'
@@ -76,6 +83,10 @@ export class UserCardComponent
 
   ngAfterContentInit(): void {
     console.log('init');
+  }
+
+  ngAfterContentChecked(): void {
+    console.log("after content checked")
   }
 
   ngAfterViewInit(): void {
