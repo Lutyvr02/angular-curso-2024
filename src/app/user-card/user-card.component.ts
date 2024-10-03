@@ -18,6 +18,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CounterComponent } from "../counter/counter.component";
 
 @Component({
   selector: 'app-user-card',
