@@ -13,24 +13,21 @@ export class CounterComponent {
 
   constructor() {
     afterRender({
-      earlyRead: () => {
-        const currentAppColor = this.appBackGround
-        return 'Form earlyRead: ' + currentAppColor
-      },
-      mixedReadWrite:(props) => {
-        if(props.indexOf('red') > -1){
-          this.appBackGround = 'green'
-        } else {
+      write:() => {
+        document.body.style.backgroundColor = this.appBackGround
+        const currentColor = this.appBackGround
+
+        if(currentColor == 'red'){
+          this.appBackGround = 'blue'
+        } else{
           this.appBackGround = 'red'
         }
-        return 'From mixedReadWrite: '+ this.appBackGround
-      },
-      write:(props) => {
-        document.body.style.backgroundColor = this.appBackGround
         return 'FROM write: '+ this.appBackGround
       },
       read:(props) => {
+        console.log('into read ', props)
         const newBackGround = this.appBackGround
+        
       },
     });
 
