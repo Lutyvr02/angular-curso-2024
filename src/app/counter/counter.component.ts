@@ -17,17 +17,17 @@ export class CounterComponent {
         document.body.style.backgroundColor = this.appBackGround
         const currentColor = this.appBackGround
 
-        if(currentColor == 'red'){
+        if(currentColor === 'red'){
           this.appBackGround = 'blue'
         } else{
           this.appBackGround = 'red'
         }
-        return 'FROM write: '+ this.appBackGround
+        return 'From mixedReadWrite: ' + this.appBackGround
       },
       read:(props) => {
-        console.log('into read ', props)
-        const newBackGround = this.appBackGround
-        
+        console.log('INTO read ', props)
+        const newBackground = this.appBackGround
+        console.log('FROM read: ', newBackground)
       },
     });
 

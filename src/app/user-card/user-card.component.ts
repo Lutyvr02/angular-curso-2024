@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
 
 @Component({
-  selector: 'app-user-card',
+  selector: 'user-card',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './user-card.component.html',
@@ -38,25 +38,26 @@ export class UserCardComponent
     AfterContentChecked,
     AfterViewChecked
 {
-  @Input() name: string = '';
-  @Input() email: string = '';
+  @Input() name: string = 'abc';
+  @Input() email: string = 'abc@gmail.com';
 
   @Output() sendData = new EventEmitter();
   
   @ViewChild('buttonTest', {static: true}) buttonTest!: ElementRef 
   @ViewChild('buttonShow', {static: true}) buttonShow!: ElementRef 
+
+  password: string = "password";
   
   private prevPadding = 0;
   public onSendData() {
     this.sendData.emit('hola desde el hijo');
   }
 
-  password: string = '';
-
   showButton:boolean = false
 
   constructor() {
     console.log('user card constructor');
+
   }
 
   ngAfterViewChecked(): void {
