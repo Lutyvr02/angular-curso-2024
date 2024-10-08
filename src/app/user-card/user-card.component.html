@@ -6,8 +6,8 @@
         'background-color': password === 'red' ? 'red' : 'yellow' ,
     }">User card Componene</P>
     <p>USER CARD COMPONENT</p>
-    <P>INPUT NAME: {{ name }}</P>
-    <P [ngClass]="'user-card'">INPUT EMAIL: {{ email }}</P>
+    <P [class.user-card] = "password === '123'">INPUT NAME: {{ name }}</P>
+    <P [style.background-color]="password === 'red' ? 'red' : 'yellow' ">INPUT EMAIL: {{ email }}</P>
 
     <input type="text" [(ngModel)] = "password">
 
@@ -16,8 +16,10 @@
         <button #buttonTest (click)="onSendData()">send data</button>
     }
 
-    
-
-
     <p>Password = {{password}}</p>
+
+    <app-navbar></app-navbar>
+    <app-alert></app-alert>
+    <app-card></app-card>
+
 </div>

@@ -19,11 +19,12 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'user-card',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SharedModule],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })
