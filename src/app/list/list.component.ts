@@ -17,4 +17,8 @@ export class ListComponent {
   onSelect(item: Student | Professor) {
     this.selectItem.emit(item);
   }
+
+  onDelete(item: Student | Professor) {
+    this.items = this.items.filter(i => i !== item);
+  }
 }

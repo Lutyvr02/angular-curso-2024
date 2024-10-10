@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 export class ItemComponent {
   @Input() item!: Student | Professor;
   @Output() select = new EventEmitter<void>();
+  @Output() delete = new EventEmitter<void>();
 
   getBackgroundColor() {
     if (this.item.type === 'student') return 'lightblue';
@@ -21,5 +22,9 @@ export class ItemComponent {
 
   onSelect() {
     this.select.emit();
+  }
+
+  onDelete() {  // Nuevo método para manejar eliminación
+    this.delete.emit();
   }
 }

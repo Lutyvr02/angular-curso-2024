@@ -1,5 +1,6 @@
 <div class="list-group-item" [ngStyle]="{ 'background-color': getBackgroundColor() }">
     {{ item.name }} {{ item.lastName }} - {{ item.type === 'student' ? 'Student' : 'Professor' }}
     <button (click)="onSelect()" class="btn btn-info">Show</button>
+    <button (click)="onDelete()" class="btn btn-danger">Delete</button> <!-- Nuevo botón -->
   </div>
   
