@@ -1,134 +1,40 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { UserCardComponent } from './user-card/user-card.component';
-import { CalculatorComponent } from './calculator/calculator.component';
-import { CommonModule } from '@angular/common';
-import { PersonListComponent } from './person-list/person-list.component';
-import { CounterComponent } from './counter/counter.component';
-import { filter, from, map, tap } from 'rxjs';
-
-interface IPerson {
-  name: string;
-  lastname: string;
-  age: number;
-}
+import { SearchComponent } from './search/search.component';
+import { ListComponent } from './list/list.component';
+import { CardComponent } from './card/card.component';
+import { ItemComponent } from './item/item.component';
+import { data } from './data';
+import { Student, Professor } from './models';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
-    UserCardComponent,
-    CalculatorComponent,
-    CommonModule,
-    PersonListComponent,
-    CounterComponent,
+    SearchComponent, 
+    ListComponent,
+    CardComponent,
+    ItemComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  users = [
-    { name: 'abc', email: 'abc@gmail.com' },
-    { name: 'tyty', email: 'tyty@gmail.com' },
-  ];
-  selectedUser: any = this.users[0];
-
-  result = 0;
   title = 'angular-course-2024';
-  animals: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
-  person: IPerson = {
-    name: 'juan',
-    lastname: 'perez',
-    age: 12,
-  };
+  items: (Student | Professor)[] = Object.values(data);
+  filteredItems = this.items;
+  selectedItem!: Student | Professor;
 
-  students: number[] = [1, 2, 3, 4, 5, 6];
-  parents: number[] = [7, 8, 9, 10];
-
-  var1 = 0;
-  var2 = null;
-  var3 = 'hola';
-
-  youtube = from([1, 2, 3, 4, 5, 6]);
-
-  constructor() {
-    /*   const {name, age} = this.person
-    console.log('desustruraccion', name, age)
-
-    let both = [...this.students,...this.parents]
-  /*  console.log("spread proyector: "+both)*/
-
-    console.log('REST operator: ', this.sum2(2, 4, 6));
-
-    console.log('Nullish Coalesing: ', this.var2 ?? this.var3);
-
-    /*  console.log('OR: ', this.var1 ||  this.var2)*/
-
-    /*console.log('MAP: ', this.animals.map( (animal) => {animal + 'new'}))
-    console.log('FOREACH: ', this.animals.forEach((animal)=>{animal + 'new'}))
-    console.log('FIND', this.animals.find((animal)=> animal == 'b'))
-    console.log('FILTER', this.animals.filter((animal)=> animal == 'c'))
-    console.log('INDEXOF', this.animals.indexOf('c'))*/
-
-    this.youtube.subscribe((res) => {
-      console.log('sub 1: ', res);
-    });
-  }
-
-  public sum(num1: number, num2: number): number {
-    return num1 + num2;
-  }
-
-  private sub(num1: number, num2: number): number {
-    return num1 - num2;
-  }
-  /*
-  public getArray(){
-    const persons:number[] = [1,2,3,4,5]
-    for(let i = 0; i < persons.length; i++){
-      if(persons[i]  % 2 === 0){
-        console.log('person =', persons[i])
-      }
-    }
-  }*/
-
-  public sum2(...persons: number[]) {
-    //return persons[0] + persons[1]
-    return persons.reduce(
-      (acumulador, valorActual) => acumulador + valorActual
+  onSearch(term: string) {
+    this.filteredItems = this.items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(term.toLowerCase()) ||
+        item.lastName.toLowerCase().includes(term.toLowerCase())
     );
   }
 
-  public recieveData(data: any) {
-    console.log('Print: ' + data);
+  onItemSelect(item: Student | Professor) {
+    this.selectedItem = item;
   }
-
-  public onResult(event: any) {
-    this.result = event ?? 0;
-  }
-
-  addVideo() {
-    this.youtube
-      .pipe(
-        map((res) => {
-          console.log('map operator rxjs: ', res);
-          if (res % 2 == 0) {
-            return res;
-          } else {
-            return null;
-          }
-        }),
-        tap((res) => {
-          console.log('VAlue: ', res);
-        }),
-        filter((res: number | null) => res != null)
-      )
-      .subscribe((res) => {
-        console.log('sub 2: ', res);
-      });
-  }
-
-  userCardCreated: boolean = true;
+ 
 }

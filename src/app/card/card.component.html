@@ -1,0 +1,35 @@
+<div *ngIf="item">
+  <ul class="nav nav-tabs">
+    <li class="nav-item" (click)="selectedTab = 'personal'">
+      <a class="nav-link" [class.active]="selectedTab === 'personal'">Personal</a>
+    </li>
+    <li class="nav-item" (click)="selectedTab = 'geographic'">
+      <a class="nav-link" [class.active]="selectedTab === 'geographic'">Geographic</a>
+    </li>
+    <li class="nav-item" (click)="selectedTab = 'messages'">
+      <a class="nav-link" [class.active]="selectedTab === 'messages'">Messages</a>
+    </li>
+  </ul>
+
+  <div [ngSwitch]="selectedTab">
+    <div *ngSwitchCase="'personal'">
+      <p>Name: {{ item.name }} {{ item.lastName }}</p>
+      <p *ngIf="item.type === 'student'">Average Score: {{ getAverageScore() }}</p>
+    </div>
+
+    <div *ngSwitchCase="'geographic'">
+      <p>Address: {{ item.address.street }} {{ item.address.number }} - {{ item.address.zone }}</p>
+      <p>Country: {{ item.country }} - Province: {{ item.province }}</p>
+    </div>
+
+    <div *ngSwitchCase="'messages'">
+      <!-- SearchComponent for filtering messages -->
+      <app-search (searchChange)="onSearchMessages($event)"></app-search>
+
+      <!-- Display filtered messages -->
+      <ul>
+        <li *ngFor="let message of filteredMessages">{{ message }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

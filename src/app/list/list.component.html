@@ -1,0 +1,4 @@
+
+<div *ngFor="let item of items" class="list-group">
+  <app-item [item]="item" (select)="onSelect(item)"></app-item>
+</div>
