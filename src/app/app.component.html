@@ -82,6 +82,11 @@
 
 <app-person-list></app-person-list>-->
 
-<user-card></user-card>
-
-<button (click)="addVideo()">add video to youtube</button>
+<div  
+[ngColors]="'green'" 
+[defaultColor]="'pink'" 
+(colorClick)="getColor($event)" 
+(colorDoubleCick)="getColor($event)"     
+             style="border: 1px solid orange;">
+  MY CUSTOM ATTRIBUTE DIRECTIVE
+</div>

@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common';
 import { PersonListComponent } from './person-list/person-list.component';
 import { CounterComponent } from './counter/counter.component';
 import { filter, from, map, tap } from 'rxjs';
-
+import { AppColorsDirective } from "./app-colors.directive";
+/*
 interface IPerson {
   name: string;
   lastname: string;
   age: number;
-}
+}*/
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ interface IPerson {
     CommonModule,
     PersonListComponent,
     CounterComponent,
+    AppColorsDirective
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -37,12 +39,6 @@ export class AppComponent {
   result = 0;
   title = 'angular-course-2024';
   animals: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-
-  person: IPerson = {
-    name: 'juan',
-    lastname: 'perez',
-    age: 12,
-  };
 
   students: number[] = [1, 2, 3, 4, 5, 6];
   parents: number[] = [7, 8, 9, 10];
@@ -131,4 +127,9 @@ export class AppComponent {
   }
 
   userCardCreated: boolean = true;
+
+
+  public getColor(value:string): void {
+    console.log("value: ", value);
+  }
 }
