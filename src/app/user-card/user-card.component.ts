@@ -20,6 +20,8 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CounterComponent } from "../counter/counter.component";
 import { SharedModule } from '../shared/shared.module';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'user-card',
@@ -48,6 +50,8 @@ export class UserCardComponent
   @ViewChild('buttonShow', {static: true}) buttonShow!: ElementRef 
 
   password: string = "password";
+
+  subscription!: Subscription;
   
   private prevPadding = 0;
   public onSendData() {
@@ -56,8 +60,17 @@ export class UserCardComponent
 
   showButton:boolean = false
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
     console.log('user card constructor');
+
+    this.activatedRoute.params.subscribe((params) => {
+      console.log("params: ", params)
+    })
+
+
+
+
+   console.log('snapshot: ',  this.activatedRoute.snapshot.params)
 
   }
 
@@ -71,6 +84,7 @@ export class UserCardComponent
 
   ngOnDestroy(): void {
     console.log('user card destroy');
+    this.subscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CommonModule } from '@angular/common';
 import { PersonListComponent } from './person-list/person-list.component';
 import { CounterComponent } from './counter/counter.component';
 import { filter, from, map, tap } from 'rxjs';
-import { AppColorsDirective } from "./app-colors.directive";
+import { AppColorsDirective } from './app-colors.directive';
 import { CreateHtmlDirective } from './create-html.directive';
-import { PurePipe } from "./pure.pipe";
-import { ImpurePipe } from "./impure.pipe";
+import { PurePipe } from './pure.pipe';
+import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 /*
@@ -35,7 +35,7 @@ interface IPerson {
     ImpurePipe,
     MatCardModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -47,12 +47,11 @@ export class AppComponent {
   ];
   selectedUser: any = this.users[0];
 
-    
   result = 0;
   title = 'angular-course-2024';
   animals: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
-  students: number[] = [1, 2, 3, 4, 5, 6,7,8,9];
+  students: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   parents: number[] = [7, 8, 9, 10];
 
   var1 = 0;
@@ -61,7 +60,9 @@ export class AppComponent {
 
   youtube = from([1, 2, 3, 4, 5, 6]);
 
-  constructor() {
+  constructor(private router: Router) {
+
+
     /*   const {name, age} = this.person
     console.log('desustruraccion', name, age)
 
@@ -140,19 +141,26 @@ export class AppComponent {
 
   userCardCreated: boolean = true;
 
-
-  public getColor(value:any): void {
-    console.log("value: ", value);
+  public getColor(value: any): void {
+    console.log('value: ', value);
   }
 
-  public sumPure(a:number, b:number): number {
+  public sumPure(a: number, b: number): number {
     return a + b;
   }
-  public sumImpure(a:number, b:number): number {
+  public sumImpure(a: number, b: number): number {
     return a + b + Math.random();
   }
 
   public addNumber() {
-    this.students = [...this.students, 12]
+    this.students = [...this.students, 12];
+  }
+
+  public goToStudentModule() {
+    this.router.navigate(['student']);
+  }
+
+  public goToCard() {
+    this.router.navigate(['user-card', 1]);
   }
 }
