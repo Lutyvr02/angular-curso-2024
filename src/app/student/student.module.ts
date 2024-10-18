@@ -2,13 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StudentRoutingModule } from './student-routing.module';
+import { AverageComponent } from './average/average.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    
+  ],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    AverageComponent
   ]
 })
 export class StudentModule { }
