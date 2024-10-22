@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
@@ -12,12 +12,10 @@ import { PurePipe } from './pure.pipe';
 import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-/*
-interface IPerson {
-  name: string;
-  lastname: string;
-  age: number;
-}*/
+import { BrowserModule } from '@angular/platform-browser';
+import { UserComponentComponent } from './user-component/user-component.component';
+import { NotificationComponentComponent } from "./notification-component/notification-component.component";
+
 
 @Component({
   selector: 'app-root',
@@ -36,7 +34,9 @@ interface IPerson {
     MatCardModule,
     MatButtonModule,
     RouterLink,
-  ],
+    UserComponentComponent,
+    NotificationComponentComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -163,4 +163,7 @@ export class AppComponent {
   public goToCard() {
     this.router.navigate(['user-card', 1]);
   }
+
+  
+
 }

@@ -1,0 +1,44 @@
+<div *ngFor="let user of users">
+    <div class="user-info">
+        <p>Name: {{ user.name }}</p>
+        <p>Age: {{ user.age }}</p>
+        <p>Status: {{ user.status }}</p>
+        <p>Subscription Type: {{ user.subscriptionType }}</p>
+        <p>Amount Available: ${{ user.amountAvailable }}</p>
+    </div>
+
+    <div class="notification-controls">
+        <h4>Generate Notifications</h4>
+        <button 
+            *ngFor="let network of dataService.getSocialNetworks()" 
+            (click)="generateNotification(user, network.id, network.type)"
+            [disabled]="isComponentDisabled(user)">
+            Add new {{ network.type }} on {{ network.platform }}
+        </button>
+    </div>
+
+    <div class="social-networks">
+        <h4>Social Networks</h4>
+        <button 
+            *ngFor="let network of dataService.getSocialNetworks()" 
+            (click)="addSubscription(user, network.id)"
+            [disabled]="isComponentDisabled(user)">
+            {{ network.platform }}
+        </button>
+    </div>
+
+    <div class="subscriptions">
+        <h4>Subscriptions</h4>
+        <button 
+            *ngFor="let id of user.subscriptions" 
+            (click)="removeSubscription(user, id)"
+            [disabled]="isComponentDisabled(user)">
+            {{ getPlatformNameById(id) }} (x)
+        </button>
+    </div>
+
+    <button (click)="toggleComponentState(user)">Close Account</button>
+
+    <app-notification-component [notifications]="user.notifications"></app-notification-component>
+
+</div>
