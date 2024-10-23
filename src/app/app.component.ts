@@ -12,7 +12,7 @@ import { PurePipe } from './pure.pipe';
 import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 /*
 interface IPerson {
   name: string;
@@ -37,12 +37,16 @@ interface IPerson {
     MatCardModule,
     MatButtonModule,
     RouterLink,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+  scoreControl = new FormControl<string>('',[Validators.required])
+
   name: string = ''
   lastname: string = ''
 
@@ -67,6 +71,9 @@ export class AppComponent {
 
   constructor(private router: Router) {
 
+    this.scoreControl.valueChanges.subscribe((res) => {
+      console.log('score value: ', res)
+    })
 
     /*   const {name, age} = this.person
     console.log('desustruraccion', name, age)
@@ -175,5 +182,8 @@ export class AppComponent {
 
   public onSubmit(data:any){
     console.log('template driven: ', data)
+  }
+  public onPrintScore(){
+    console.log('Score: ', this.scoreControl.value)
   }
 }
