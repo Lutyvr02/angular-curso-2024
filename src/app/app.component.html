@@ -60,7 +60,11 @@
 <p>navigation</p>
 <button type="button" class="btn btn-light" [routerLink]="['user-card', 8]">User Card</button>
 <button type="button" class="btn btn-light" (click)="goToCard()">User Card1</button>
-<button type="button" class="btn btn-dark" [routerLink]="'/cal'">Calculator</button>
+<button type="button" class="btn btn-dark" [routerLink]="'/cal'" [queryParams]="{ name: 'test', lastName: 'perez' }
+" (click)="onCalculator()">Calculator from html</button>
+
+<button type="button" class="btn btn-dark" [routerLink]="'/cal'" [queryParams]="{ name: 'test', lastName: 'perez' }">Calculator from ts</button>
+
 <button type="button" class="btn btn-warning" [routerLink]="'/counter-nav'">counter-nav</button>
 <button type="button" class="btn btn-warning" [routerLink]="'/student'">student score </button>
 

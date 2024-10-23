@@ -163,4 +163,8 @@ export class AppComponent {
   public goToCard() {
     this.router.navigate(['user-card', 1]);
   }
+
+  public onCalculator(){
+    this.router.navigate(['cal'], {queryParams: {name: 'jhon', age:20}})
+  }
 }
