@@ -95,3 +95,21 @@
 </div>
 
 
+<input type="text" 
+#nameT="ngModel" 
+name="nameF"
+ ngModel 
+ required>
+<div *ngIf="nameT.invalid && nameT.touched" style="color: red">
+  THERE IS AN ERROR
+</div>
+<p>{{ nameT.invalid | json }}</p>
+<p>{{ nameT.touched | json }}</p>
+
+          <!-- <div *ngIf="studentForm.get('name')?.errors?.required">
+            name is required
+          </div> -->
+          <div *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched">
+            name is required
+          </div>
+          <button (click)="print()">print name control</button>
