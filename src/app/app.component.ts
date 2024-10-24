@@ -12,13 +12,23 @@ import { PurePipe } from './pure.pipe';
 import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-/*
-interface IPerson {
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+interface IForm {
   name: string;
-  lastname: string;
-  age: number;
-}*/
+  score: string;
+  school: string;
+  proffesor: string;
+  university: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -38,19 +48,19 @@ interface IPerson {
     MatButtonModule,
     RouterLink,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  studentForm!: FormGroup
-  
+  studentForm!: FormGroup;
 
-  scoreControl = new FormControl<string>('',[Validators.required])
+  student2Form!: UntypedFormGroup;
+  scoreControl = new FormControl<string>('', [Validators.required]);
 
-  name: string = ''
-  lastname: string = ''
+  name: string = '';
+  lastname: string = '';
 
   users = [
     { name: 'abc', email: 'abc@gmail.com' },
@@ -71,30 +81,17 @@ export class AppComponent {
 
   youtube = from([1, 2, 3, 4, 5, 6]);
 
-  constructor(private router: Router, private formBuilder: FormBuilder) {
-
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private untypedFormBuilder: UntypedFormBuilder
+  ) {
     this.scoreControl.valueChanges.subscribe((res) => {
-      console.log('score value: ', res)
-    })
-
-    /*   const {name, age} = this.person
-    console.log('desustruraccion', name, age)
-
-    let both = [...this.students,...this.parents]
-  /*  console.log("spread proyector: "+both)*/
+      console.log('score value: ', res);
+    });
 
     console.log('REST operator: ', this.sum2(2, 4, 6));
-
     console.log('Nullish Coalesing: ', this.var2 ?? this.var3);
-
-    /*  console.log('OR: ', this.var1 ||  this.var2)*/
-
-    /*console.log('MAP: ', this.animals.map( (animal) => {animal + 'new'}))
-    console.log('FOREACH: ', this.animals.forEach((animal)=>{animal + 'new'}))
-    console.log('FIND', this.animals.find((animal)=> animal == 'b'))
-    console.log('FILTER', this.animals.filter((animal)=> animal == 'c'))
-    console.log('INDEXOF', this.animals.indexOf('c'))*/
-
     this.youtube.subscribe((res) => {
       console.log('sub 1: ', res);
     });
@@ -104,14 +101,22 @@ export class AppComponent {
       score: [''],
       school: [''],
       proffesor: [''],
-      university: ['']
-    })
+      university: [''],
+    });
     this.studentForm.valueChanges.subscribe((res) => {
-      console.log('FORM GROUP OBSERVABLE: ', res)
-    })
+      console.log('FORM GROUP OBSERVABLE: ', res);
+    });
+
+    this.student2Form = this.untypedFormBuilder.group({
+      name: ['', Validators.required],
+      score: [''],
+      school: [''],
+      proffesor: [''],
+      university: [''],
+    });
   }
   onSendData() {
-    console.log('FORM GROUP: ', this.studentForm)
+    console.log('FORM GROUP: ', this.studentForm);
   }
 
   public sum(num1: number, num2: number): number {
@@ -121,15 +126,6 @@ export class AppComponent {
   private sub(num1: number, num2: number): number {
     return num1 - num2;
   }
-  /*
-  public getArray(){
-    const persons:number[] = [1,2,3,4,5]
-    for(let i = 0; i < persons.length; i++){
-      if(persons[i]  % 2 === 0){
-        console.log('person =', persons[i])
-      }
-    }
-  }*/
 
   public sum2(...persons: number[]) {
     //return persons[0] + persons[1]
@@ -192,14 +188,14 @@ export class AppComponent {
     this.router.navigate(['user-card', 1]);
   }
 
-  public onCalculator(){
-    this.router.navigate(['cal'], {queryParams: {name: 'jhon', age:20}})
+  public onCalculator() {
+    this.router.navigate(['cal'], { queryParams: { name: 'jhon', age: 20 } });
   }
 
-  public onSubmit(data:any){
-    console.log('template driven: ', data)
+  public onSubmit(data: any) {
+    console.log('template driven: ', data);
   }
-  public onPrintScore(){
-    console.log('Score: ', this.scoreControl.value)
+  public onPrintScore() {
+    console.log('Score: ', this.scoreControl.value);
   }
 }
