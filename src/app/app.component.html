@@ -23,22 +23,22 @@
     </mat-card-header>
     <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
     <mat-card-content>
-    <form #testForm="ngForm" (ngSubmit)="onSubmit(testForm)">
-      <p>name</p>
-      <input type="text" ngModel name="nameF">
-      <p>lastname</p>
-      <input type="text" ngModel lastname="nameF">
-      <p>age</p>
-      <input type="text" ngModel age="ageF">
-      <p>city</p>
-      <input type="text" ngModel city="cityF">
-      <p>phone</p>
-      <input type="text" ngModel phone="phoneF">
-      <button>send data</button>
-      <p>REACTIVE FORM</p>
-      <input type="text" [formControl]="scoreControl">
-      <button (click)="onPrintScore()">print score</button>
-    </form>      
+      <p>FORM GROUP</p>
+      <form [formGroup]="studentForm">
+        <p>name</p>
+        <input type="text" [formControlName]="'name'">
+        <p>score</p>
+        <input type="text" [formControlName]="'score'">
+        <p>school</p>
+        <input type="text" [formControlName]="'school'">
+        <p>proffesor</p>
+        <input type="text" [formControlName]="'proffesor'">
+        <p>university</p>
+        <input type="text" [formControlName]="'university'">
+      </form>
+      <button (click)="onSendData()"
+      [disabled]="studentForm.invalid">send data</button>
+ 
 
     </mat-card-content>
     <mat-card-actions>
@@ -93,3 +93,5 @@
 </router-outlet>
 
 </div>
+
+

@@ -12,7 +12,7 @@ import { PurePipe } from './pure.pipe';
 import { ImpurePipe } from './impure.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 /*
 interface IPerson {
   name: string;
@@ -44,6 +44,8 @@ interface IPerson {
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  studentForm!: FormGroup
+  
 
   scoreControl = new FormControl<string>('',[Validators.required])
 
@@ -69,7 +71,7 @@ export class AppComponent {
 
   youtube = from([1, 2, 3, 4, 5, 6]);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private formBuilder: FormBuilder) {
 
     this.scoreControl.valueChanges.subscribe((res) => {
       console.log('score value: ', res)
@@ -96,6 +98,20 @@ export class AppComponent {
     this.youtube.subscribe((res) => {
       console.log('sub 1: ', res);
     });
+
+    this.studentForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      score: [''],
+      school: [''],
+      proffesor: [''],
+      university: ['']
+    })
+    this.studentForm.valueChanges.subscribe((res) => {
+      console.log('FORM GROUP OBSERVABLE: ', res)
+    })
+  }
+  onSendData() {
+    console.log('FORM GROUP: ', this.studentForm)
   }
 
   public sum(num1: number, num2: number): number {
