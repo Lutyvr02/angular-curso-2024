@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StudentRoutingModule } from './student-routing.module';
 import { AverageComponent } from './average/average.component';
-
+import { ExamService } from './../exam.service';
 
 @NgModule({
   declarations: [
@@ -13,6 +13,9 @@ import { AverageComponent } from './average/average.component';
     CommonModule,
     StudentRoutingModule,
     AverageComponent
+  ],
+  providers: [
+    ExamService
   ]
 })
 export class StudentModule { }
