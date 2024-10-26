@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { AuthGuard } from './auth.guard';
+import { GuardForm } from './guard-form.guard';
 
 export const routes: Routes = [
 
@@ -12,7 +13,9 @@ export const routes: Routes = [
     },
     {
         path: 'cal',
-        component: CalculatorComponent
+        component: CalculatorComponent,
+        canDeactivate: [GuardForm]
+        
     },
     {
         path: 'counter-nav',

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ScoreComponent } from './score/score.component';
 import { ClassmateComponent } from './classmate/classmate.component';
 import { AverageComponent } from './average/average.component';
+import { GuardChild } from '../guard-child.guard';
 
 const routes: Routes = [
 
@@ -11,7 +12,8 @@ const routes: Routes = [
     children: [
       {
         path: 'average',
-        component: AverageComponent
+        component: AverageComponent,
+        canActivateChild: [GuardChild],
       }
     ]
   },
