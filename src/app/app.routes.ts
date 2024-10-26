@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
 
@@ -20,6 +21,8 @@ export const routes: Routes = [
     },
     {
         path: 'student',
+        title: 'Student',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./student/student.module').then (m => m.StudentModule)
     }
 ];

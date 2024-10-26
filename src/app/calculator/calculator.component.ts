@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from '../history/history.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
+
 @Component({
   selector: 'calculator',
   standalone: true,
-  imports: [FormsModule, HistoryComponent],
+  imports: [FormsModule, HistoryComponent, RouterLink],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.scss',
 })
@@ -21,11 +22,13 @@ export class CalculatorComponent {
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _router: Router
   ) {}
 
   onLogin() {
-    this._authService.login();
+    this._authService.login();    
+    this._router.navigate(['/student']);
   }
 
   ngOnInit(): void {
