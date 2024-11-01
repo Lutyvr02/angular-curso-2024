@@ -58,7 +58,13 @@ export class AppComponent {
 
   youtube = from([1, 2, 3, 4, 5, 6]);
 
-  constructor( private _studentService: StudentService,  private router: Router,  private formBuilder: FormBuilder,) {
+  constructor( private _studentService: StudentService,  private router: Router,  private formBuilder: FormBuilder,
+    private untypedFormBuilder: UntypedFormBuilder
+  ) {
+
+    this._studentService.getStudents().subscribe((res) => {
+      console.log('STUDENTS JSON: ', res)
+    });  
 
 
     /*   const {name, age} = this.person
