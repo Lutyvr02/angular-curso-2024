@@ -1,31 +1,40 @@
-import { Component, Injectable } from '@angular/core';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
-import { UserCardComponent } from './user-card/user-card.component';
-import { CalculatorComponent } from './calculator/calculator.component';
-import { CommonModule } from '@angular/common';
-import { PersonListComponent } from './person-list/person-list.component';
-import { CounterComponent } from './counter/counter.component';
-import { filter, from, map, tap } from 'rxjs';
-import { AppColorsDirective } from './app-colors.directive';
-import { CreateHtmlDirective } from './create-html.directive';
-import { PurePipe } from './pure.pipe';
-import { ImpurePipe } from './impure.pipe';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { BrowserModule } from '@angular/platform-browser';
+import { Component } from "@angular/core";
+import { RouterOutlet, RouterLink, Router } from "@angular/router";
+import { UserCardComponent } from "./user-card/user-card.component";
+import { CalculatorComponent } from "./calculator/calculator.component";
+import { CommonModule } from "@angular/common";
+import { CounterComponent } from "./counter/counter.component";
+import { filter, from, map, tap } from "rxjs";
+import { AppColorsDirective } from "./app-colors.directive";
+import { CreateHtmlDirective } from "./create-html.directive";
+import { PurePipe } from "./pure.pipe";
+import { ImpurePipe } from "./impure.pipe";
+import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from "@angular/material/button";
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, UntypedFormBuilder, UntypedFormGroup,  } from "@angular/forms";
 import { StudentService } from "./services/student.service";
+interface IPerson {
+  name: string;
+  lastName: string;
+  age?: number;
+}
 
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
-
+interface IForm {
+  name: string
+  score: string
+  school: string
+  proffesor: string
+  university: string
+}
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
+    RouterLink,
     UserCardComponent,
     CalculatorComponent,
     CommonModule,
-    PersonListComponent,
     CounterComponent,
     AppColorsDirective,
     CreateHtmlDirective,
@@ -33,12 +42,18 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
     ImpurePipe,
     MatCardModule,
     MatButtonModule,
-    RouterLink,
-],
+    FormsModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+  scoreControl = new FormControl<string>('asdasdasd', [Validators.required])
+  name:string = 'testName'
+  lastName:string = ''
+
   users = [
     { name: 'abc', email: 'abc@gmail.com' },
     { name: 'tyty', email: 'tyty@gmail.com' },
@@ -49,6 +64,12 @@ export class AppComponent {
   title = 'angular-course-2024';
   animals: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
+  person: IPerson = {
+    name: "Juan",
+    lastName: "Perez",
+    age: 25,
+  };
+
   students: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   parents: number[] = [7, 8, 9, 10];
 
@@ -58,116 +79,147 @@ export class AppComponent {
 
   youtube = from([1, 2, 3, 4, 5, 6]);
 
-  constructor( private _studentService: StudentService,  private router: Router,  private formBuilder: FormBuilder,
-    private untypedFormBuilder: UntypedFormBuilder
-  ) {
+  studentForm!: FormGroup
+  student2Form!: UntypedFormGroup
+
+  constructor(private router: Router, private formBuilder: FormBuilder,
+    private untypedFormBuilder: UntypedFormBuilder, private _studentService: StudentService,) {
+
+    const { name, age } = this.person;
+    let both = [...this.students, ...this.parents];
 
     this._studentService.getStudents().subscribe((res) => {
       console.log('STUDENTS JSON: ', res)
     });  
 
 
-    /*   const {name, age} = this.person
-    console.log('desustruraccion', name, age)
+    this.student2Form = this.untypedFormBuilder.group({
+      name: ['', Validators.required],
+      score: [''],
+      school: [''],
+      proffesor: [''],
+      university: ['']
+    })
 
-    let both = [...this.students,...this.parents]
-  /*  console.log("spread proyector: "+both)*/
+    this.studentForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      score: [''],
+      school: [''],
+      proffesor: [''],
+      university: ['']
+    })
+    this.studentForm.valueChanges.subscribe((res) => {
+      console.log('FORM GROUP OBSERVABLE: ', res)
+    })
 
-    console.log('REST operator: ', this.sum2(2, 4, 6));
-
-    console.log('Nullish Coalesing: ', this.var2 ?? this.var3);
-
-    /*  console.log('OR: ', this.var1 ||  this.var2)*/
-
-    /*console.log('MAP: ', this.animals.map( (animal) => {animal + 'new'}))
-    console.log('FOREACH: ', this.animals.forEach((animal)=>{animal + 'new'}))
-    console.log('FIND', this.animals.find((animal)=> animal == 'b'))
-    console.log('FILTER', this.animals.filter((animal)=> animal == 'c'))
-    console.log('INDEXOF', this.animals.indexOf('c'))*/
-
-    this.youtube.subscribe((res) => {
-      console.log('sub 1: ', res);
-    });
+  }
+   public sumPure(a:number, b:number): number {
+    return a + b;
   }
 
-  public sum(num1: number, num2: number): number {
-    return num1 + num2;
+  public sumImpure(a:number, b:number): number {
+    return a + b + Math.random();
   }
 
-  private sub(num1: number, num2: number): number {
-    return num1 - num2;
-  }
-  /*
-  public getArray(){
-    const persons:number[] = [1,2,3,4,5]
-    for(let i = 0; i < persons.length; i++){
-      if(persons[i]  % 2 === 0){
-        console.log('person =', persons[i])
-      }
-    }
-  }*/
-
-  public sum2(...persons: number[]) {
+  public sum(...persons: number[]) {
     //return persons[0] + persons[1]
     return persons.reduce(
-      (acumulador, valorActual) => acumulador + valorActual
+      (acumulador, valorActual) => acumulador + valorActual,
+      10
     );
-  }
-
-  public recieveData(data: any) {
-    console.log('Print: ' + data);
-  }
-
-  public onResult(event: any) {
-    this.result = event ?? 0;
   }
 
   addVideo() {
     this.youtube
       .pipe(
-        map((res) => {
-          console.log('map operator rxjs: ', res);
-          if (res % 2 == 0) {
+        map((res: number) => {
+          //console.log("MAP OPERATOER RXJS: ", res);
+          if (res % 2 === 0) {
             return res;
           } else {
-            return null;
+            return null
           }
         }),
-        tap((res) => {
-          console.log('VAlue: ', res);
-        }),
-        filter((res: number | null) => res != null)
+        tap((res)  => {console.log('VALUE: ', res)}),
+        filter((res: number | null) => res !== null),
       )
       .subscribe((res) => {
-        console.log('sub 2: ', res);
+        console.log("SUSCRIBER 2: ", res);
       });
   }
 
-  userCardCreated: boolean = true;
-
-  public getColor(value: any): void {
-    console.log('value: ', value);
+  public sum2(num1: number, num2: number): number {
+    return num1 + num2;
   }
 
-  public sumPure(a: number, b: number): number {
-    return a + b;
+  private subtract(num1: number, num2: number): number {
+    return num1 - num2;
   }
-  public sumImpure(a: number, b: number): number {
-    return a + b + Math.random();
+
+  public getArray(): void {
+    const persons: number[] = [1, 2, 3, 4, 5];
+    for (let i = 0; i < persons.length; i++) {
+      //console.log('person =', persons[i])
+    }
+  }
+
+  public getColor(value:any): void {
+    console.log("value: ", value);
+  }
+
+  //  function sumar(){
+  //   return 1 + 2;
+  //  }
+
+  //  const suma = () => {
+  //   return 1 + 2
+  //  }
+
+  //  function resta(){
+  //   return 'hola' + a
+  //  }
+
+  // arrow functions
+  //  const resta = () => ('hola' + a)
+
+  public receiveData(data: any) {
+    console.log("Print in father component: ", data);
+  }
+
+  public onResult(event: any) {
+    console.log("event from child:", event);
+    this.result = event ?? 0;
   }
 
   public addNumber() {
-    this.students = [...this.students, 12];
+    this.students = [...this.students, 12]
   }
 
   public goToStudentModule() {
-    this.router.navigate(['student']);
+    this.router.navigate(['student'])
   }
 
   public goToCard() {
-    this.router.navigate(['user-card', 1]);
+    this.router.navigate(['card', 1])
   }
 
-  
+  public onCalculator(){
+    this.router.navigate(['cal'], {queryParams: {name: 'John', age: 20}})
+  }
+
+  onSubmit(data:any){
+    console.log('TEMPLATE DRIVEN FORM: ', data)
+  }
+
+  onPrintScore(){
+    console.log('SCORE: ', this.scoreControl.value)
+  }
+
+  print(){
+    console.log('FORM NAME: ', this.studentForm.get('name'))
+  }
+  onSendData() {
+    console.log('FORM GROUP: ', this.studentForm)
+  }
 
 }

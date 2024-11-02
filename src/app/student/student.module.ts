@@ -12,7 +12,7 @@ import { ExamService } from './../exam.service';
   imports: [
     CommonModule,
     StudentRoutingModule,
-    AverageComponent
+    AverageComponent,
   ],
   providers: [
     ExamService

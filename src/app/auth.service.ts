@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private token!:string
-  private user!: string
+  private token:string = ''
+  private user: string = ''
   constructor() { }
   public login(){
     this.token = '123ABC'
@@ -18,4 +18,4 @@ export class AuthService {
   public getUser(){
     return this.user
   }
-}
+} 
