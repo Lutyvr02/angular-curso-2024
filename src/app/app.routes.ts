@@ -4,6 +4,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { AuthGuard } from './auth.guard';
 import { GuardForm } from './guard-form.guard';
 import { LoadGuard } from './load.guard';
+import { LoginComponent } from './login/login/login.component';
 
 export const routes: Routes = [
 
@@ -29,5 +30,10 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         canMatch:[LoadGuard],
         loadChildren: () => import('./student/student.module').then (m => m.StudentModule)
-    }
+    },
+    {
+        path: '',
+        component: LoginComponent,
+        title: 'Login'
+    },
 ];

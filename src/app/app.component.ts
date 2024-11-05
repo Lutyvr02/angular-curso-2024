@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, UntypedFormBuilder, UntypedFormGroup,  } from "@angular/forms";
 import { StudentService } from "./services/student.service";
+import { AuthService } from "./auth.service";
 interface IPerson {
   name: string;
   lastName: string;
@@ -83,14 +84,14 @@ export class AppComponent {
   student2Form!: UntypedFormGroup
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    private untypedFormBuilder: UntypedFormBuilder, private _studentService: StudentService,) {
+    private untypedFormBuilder: UntypedFormBuilder, private _studentService: StudentService, private _authService: AuthService,) {
 
     const { name, age } = this.person;
     let both = [...this.students, ...this.parents];
 
-    this._studentService.getStudents().subscribe((res) => {
+    /*this._studentService.getStudents().subscribe((res) => {
       console.log('STUDENTS JSON: ', res)
-    });  
+    });  */
 
 
     this.student2Form = this.untypedFormBuilder.group({
@@ -220,6 +221,11 @@ export class AppComponent {
   }
   onSendData() {
     console.log('FORM GROUP: ', this.studentForm)
+  }
+
+  onLogin(){
+    this._authService.login()
+    this.router.navigate(['student'])
   }
 
 }
