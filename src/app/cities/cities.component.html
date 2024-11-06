@@ -1,0 +1,16 @@
+<div>
+    <h2>City List</h2>
+  
+    <input [(ngModel)]="newCityName" placeholder="Enter city name" />
+    <button (click)="addCity()">Add City</button>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  
+    <input [(ngModel)]="searchQuery" placeholder="Search city" />
+    <button (click)="searchCity()">Search</button>
+  
+    <ul>
+      <li *ngFor="let city of cities" (click)="deleteCity(city.id)">
+        {{ city.name }}
+      </li>
+    </ul>
+  </div>
